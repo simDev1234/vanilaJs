@@ -74,11 +74,11 @@ function onColorClick(event) {
 function onModeBtnClick(event) {
     if (isFilling) {
         isFilling = false;
-        modeBtn.innerText = "Fill";
+        modeBtn.innerText = "💧 Fill";
     }
     else {
         isFilling = true;
-        modeBtn.innerText = "Draw";
+        modeBtn.innerText = "🖌️ Draw";
     }
 }
 
@@ -90,7 +90,7 @@ function onDestroyBtnClick(event) {
 function onErasorBtnClick(event) {
     ctx.strokeStyle = "white";
     isFilling = false;
-    modeBtn.innerText = "Fill";
+    modeBtn.innerText = "💧 Fill";
 }
 
 function onSaveClick(event) {
