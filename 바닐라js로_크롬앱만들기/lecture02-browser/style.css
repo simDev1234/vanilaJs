@@ -1,0 +1,17 @@
+body {
+    background-color: beige;
+}
+
+h1, li {
+    font-size: 36px;
+    color: cornflowerblue;
+    cursor:pointer;
+}
+
+.active{
+    color:blue;
+}
+
+.clicked{
+    color:blue;
+}
