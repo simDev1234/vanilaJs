@@ -8,22 +8,24 @@
 <body>
     <div id = "root"></div>
 </body>
-<!-- ReatJS는 일종의 엔진, ReatDom은 Element를 넣어줄 수 있도록 해준다. -->
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type = "text/babel">
     const root = document.getElementById("root");
-    const h3 = React.createElement("h3",null, "test");
-    const btn = React.createElement(
-        "button", 
-        {
-            id:"click-btn",
-            style:{
-                backgroundColor: "tomato"
-            },
-            onClick: () => console.log('i am clicked')
-        }, 
-        "Click Me");
+    const h3 = (
+        <h3 id="title" onMouseEnter={() => console.log("mouse entered")}>
+            Hello I'm a title
+        </h3>
+    );
+    const btn = (
+        <button 
+           style={{
+            backgroundColor: "tomato"
+            }}
+           onClick={() => console.log('i am clicked')}
+        >Click Me</button>
+    );
     const container = React.createElement("div", null, [h3, btn]);
     ReactDOM.render(container, root);
 </script>
