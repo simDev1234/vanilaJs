@@ -13,11 +13,18 @@
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script>
     const root = document.getElementById("root");
-    const span = React.createElement(
-        "span", 
-        {id: "test", style: {color:"red"}}, 
-        "test"
-    );
-    ReactDOM.render(span, root); // span을 root에 넣어준다.
+    const h3 = React.createElement("h3",null, "test");
+    const btn = React.createElement(
+        "button", 
+        {
+            id:"click-btn",
+            style:{
+                backgroundColor: "tomato"
+            },
+            onClick: () => console.log('i am clicked')
+        }, 
+        "Click Me");
+    const container = React.createElement("div", null, [h3, btn]);
+    ReactDOM.render(container, root);
 </script>
 </html>
