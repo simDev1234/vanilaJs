@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div id = "root"></div>
-</body>
-<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type = "text/babel">
+  </head>
+
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17.0.2/umd/react.development.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // label의 for - javascript word이기에 JSX가 아님
+    // JSX 문법에서 HTML의 {}는 Javascript 코드가 들어가는 부분
+    function App() {
+      const [amount, setAmount] = React.useState(0);
+      const [flipped, setFlipped] = React.useState(false);
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+      const reset = () => {
+        setAmount(0);
+      };
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+      return (
+        <div>
+          <h1 className="hi">Super Converter</h1>
+          <label htmlFor="minutes">minutes</label>
+          <input
+            value={flipped ? amount * 60 : amount}
+            id="minutes"
+            placeholder="minutes"
+            type="number"
+            onChange={onChange}
+            disabled={flipped}
+          />
+          <br />
+          <label htmlFor="hours">Hours</label>
+          <input
+            value={flipped ? amount : Math.round(amount / 60)}
+            id="hours"
+            placeholder="Hours"
+            type="number"
+            onChange={onChange}
+            disabled={!flipped}
+          />
+          <br />
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
+        </div>
+      );
+    }
     const root = document.getElementById("root");
-    let counter = 0;
-    function counterUp (){
-        counter++;
-        render();
-    }
-
-    function App(){
-        const [counter, setCounter] = React.useState(0); // default value : 0
-        const onClick = () => {
-            setCounter((current) => current + 1); 
-        }
-        return (
-            <div>
-                <h3 id="title">Total Count : {counter}</h3>
-                <button onClick = {onClick}>Click Me</button>
-            </div>
-        );
-    }
-
-    ReactDOM.render(<App/>, root); 
-    
-</script>
+    ReactDOM.render(<App />, root);
+  </script>
 </html>
