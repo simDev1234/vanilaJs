@@ -19,29 +19,33 @@
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // JSX 안의 <Btn banana = ""> --> Btn({banana:""})
-    function Btn({ banana, big }) {
+    // JSX 안의 <Btn text = ""> --> Btn({text:""})
+    function Btn({ text, onClick }) {
       return (
         <button
+          onClick={onClick}
           style={{
             backgroundColor: "tomato",
             color: "white",
             padding: "10px 20px",
             borderRadius: 10,
             border: 0,
-            fontSize: big ? "24px" : "18px",
           }}
         >
-          {banana}
+          {text}
         </button>
       );
     }
 
+    // * 커스텀 <Btn/> 안의 onClick은 Prop이다.
+    // ㄴ 만약 Btn() 안의 <button> 안에 들어가면 이벤트리스너이다.
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Btn banana="Save Changes" big={true} />
-          <Btn banana="Confirm" big={false} />
+          <Btn text={value} onClick={changeValue} />
+          <Btn text="Confirm" />
         </div>
       );
     }
