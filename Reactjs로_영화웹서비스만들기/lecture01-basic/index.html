@@ -18,8 +18,10 @@
     src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
-    function Btn({ text, onClick }) {
+    // fontSize = 14 와 같이 prop에 default value를 지정할 수 있다.
+    function Btn({ text, onClick, fontSize = 14 }) {
       console.log(text, "is rendered");
       return (
         <button
@@ -30,12 +32,19 @@
             padding: "10px 20px",
             borderRadius: 10,
             border: 0,
+            fontSize,
           }}
         >
           {text}
         </button>
       );
     }
+
+    // PropTypes 공식 Doc : https://legacy.reactjs.org/docs/typechecking-with-proptypes.html
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
 
     // React Memo를 사용하면 Prop에 변경사항이 없는 컴포넌트는 re-render 하지 않게 할 수 있다.
     const MemorizedBtn = React.memo(Btn);
@@ -45,7 +54,7 @@
       const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text={value} onClick={changeValue} fontSize={18} />
           <MemorizedBtn text="Confirm" />
         </div>
       );
