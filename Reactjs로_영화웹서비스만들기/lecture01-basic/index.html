@@ -19,8 +19,8 @@
   ></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    // JSX 안의 <Btn text = ""> --> Btn({text:""})
     function Btn({ text, onClick }) {
+      console.log(text, "is rendered");
       return (
         <button
           onClick={onClick}
@@ -37,15 +37,16 @@
       );
     }
 
-    // * 커스텀 <Btn/> 안의 onClick은 Prop이다.
-    // ㄴ 만약 Btn() 안의 <button> 안에 들어가면 이벤트리스너이다.
+    // React Memo를 사용하면 Prop에 변경사항이 없는 컴포넌트는 re-render 하지 않게 할 수 있다.
+    const MemorizedBtn = React.memo(Btn);
+
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <Btn text={value} onClick={changeValue} />
-          <Btn text="Confirm" />
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Confirm" />
         </div>
       );
     }
